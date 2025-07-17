@@ -10,6 +10,7 @@ public class InputRecordDto
     public int UserId { get; set; }
 }
 
+
 public class OutputRecordDto
 {
     public int RecordId { get; set; }
@@ -26,7 +27,7 @@ public class OutputRecordDto
             RecordText = record.RecordText,
             Completed = record.Completed,
             UserId = record.User.UserId,
-            UserName = record.User.FistName + " " + record.User.LastName
+            UserName = record.User.FirstName + " " + record.User.LastName
         };
     }
 }

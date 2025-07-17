@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Commands.Records.Create;
+using WebApplication1.Commands.Records.Delete;
+using WebApplication1.Commands.Records.Put;
 using WebApplication1.Dto;
 using WebApplication1.Models;
-using WebApplication1.Repositories;
+using WebApplication1.Queries.Record;
+using WebApplication1.Queries.Record.GetAllById;
 
 namespace WebApplication1.Controllers;
 
@@ -11,66 +16,50 @@ namespace WebApplication1.Controllers;
 [ApiController]
 public class RecordController : ControllerBase
 {
-    private readonly RecordRepository _recordRepository;
+    private readonly IMediator _mediator; 
 
-    public RecordController(RecordRepository recordRepository)
+    public RecordController(IMediator mediator)
     {
-        _recordRepository = recordRepository;
+        _mediator = mediator;
     }
 
-    [HttpGet , Authorize]
-    public async Task<ActionResult<List<OutputRecordDto>>> Get()
+    [HttpGet]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> Get()
     {
-        List<OutputRecordDto> records = await _recordRepository.GetAll();
-
-        return Ok(records);
+        return Ok(await _mediator.Send(new GetRecordListQuery()));
     }
 
     [HttpGet("{id}") , Authorize]
-    public async Task<ActionResult<OutputRecordDto>> GetById(int id)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById(int id)
     {
-        var record = await _recordRepository.GetById(id);
-        
-        return Ok(record);
+        return Ok(await _mediator.Send(new GetRecordListById(id)));
     }
-
-    [HttpGet("/GetAllByUserId/{id}"), Authorize]
-    public async Task<ActionResult<List<OutputRecordDto?>>> GetAllByUserId(int id)
-    {
-        List<OutputRecordDto?> records = await _recordRepository.GetAll();
-        return Ok(records);
-    }
+    
 
     [HttpPost , Authorize]
-    public async Task<ActionResult<OutputRecordDto>> Post([FromBody] InputRecordDto? record)
+    [ProducesResponseType(typeof(Record) , StatusCodes.Status201Created)]
+    public async Task<IActionResult> Post(CreateRecordCommand request)
     {
-        if(record == null) return BadRequest();
-        
-        OutputRecordDto? newRecord = await _recordRepository.Create(record);
-
-        return Created();
+        return Ok(await _mediator.Send(request));
     }
 
     
     [HttpPut("{id}") , Authorize]
-    public async Task<ActionResult<OutputRecordDto>> Put(int id, [FromBody] InputRecordDto? record)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Put(int id, [FromBody] InputRecordDto? record)
     {
-        if(record == null) return BadRequest();
-        
-        OutputRecordDto? updatedRecord = await _recordRepository.Put(record);
-        if (updatedRecord == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(updatedRecord);
+        return Ok(await _mediator.Send(new PutRecordCommand(id , record.RecordText)));
     }
 
     [HttpDelete("{id}") , Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<OutputRecordDto>> Delete(int id)
     {
-        var deletedRecord = await _recordRepository.Delete(id);
-        
-        return deletedRecord ? NoContent() : NotFound();
+        return Ok(await _mediator.Send(new DeleteRecordCommand(id)));
     }
 }

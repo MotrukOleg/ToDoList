@@ -1,11 +1,12 @@
-﻿namespace WebApplication1.Models;
+﻿using MediatR;
+using WebApplication1.Dto;
 
-public class User
+namespace WebApplication1.Users.Commands;
+
+public class CreateUserCommand : IRequest<RegisterUserDto>
 {
-    public int UserId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-    public List<Record> Records { get; set; }
 }

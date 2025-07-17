@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Commands.Users.Login;
 using WebApplication1.Dto;
 using WebApplication1.Models;
-using WebApplication1.Repositories;
+using WebApplication1.Users.Commands;
+using WebApplication1.Users.Queries;
 
 namespace WebApplication1.Controllers;
 
@@ -10,62 +13,34 @@ namespace WebApplication1.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly UserRepository  _userRepository;
+    private readonly IMediator _mediator;
 
-    public UserController(UserRepository userRepository)
+    public UserController(IMediator mediator)
     {
-        _userRepository = userRepository;
+        _mediator = mediator;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<User>>> Get()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllUsers()
     {
-        List<User> users = await _userRepository.GetAll();
-
-        return Ok(users);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<ActionResult<User>> GetById(int id)
-    {
-        User? user = await _userRepository.GetById(id);
-        if(user == null) return NotFound();
-
-        return Ok(user);
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<User>> Post([FromBody] RegisterUserDto registerUserDto)
-    {
-        User? user = await _userRepository.Create(registerUserDto);
-
-        return Created();
+        return Ok(await _mediator.Send(new GetUserListQuery()));
     }
     
-    [HttpPut("{id}")]
-    public async Task<ActionResult<User>> Put(int id, [FromBody] RegisterUserDto registerUserDto)
+    [HttpPost]
+    [ProducesResponseType(typeof(User), StatusCodes.Status201Created)]
+    public async Task<IActionResult> Create(CreateUserCommand request)
     {
-        User? user = await _userRepository.GetById(id);
-
-        User? updUser = await _userRepository.Put(registerUserDto);
-        
-        return Ok(updUser);
+        return Ok(await _mediator.Send(request));
     }
+    
 
-    [HttpDelete("{id}")]
-    public async Task<ActionResult<User>> Delete(int id)
+    [HttpPost("Login")]
+    [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<User>> Login([FromBody] LoginCommand? input)
     {
-        var deletedUser = await _userRepository.Delete(id);
-
-        return deletedUser ? NoContent() : NotFound();
-    }
-
-    [HttpPost("/Login")]
-    public async Task<ActionResult<User>> Login([FromBody] LoginUserDto? input)
-    {
-        (User? user , string? token) = await _userRepository.Login(input);
-        if (user == null) return Unauthorized("User not found");
-
-        return Ok(new { Token = token, User = user });
+        return Ok(await _mediator.Send(input));
     }
 }

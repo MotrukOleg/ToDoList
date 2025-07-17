@@ -25,7 +25,5 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Record>()
             .HasOne(r => r.User)
             .WithMany(u => u.Records);
-        
-        
     }
 }
