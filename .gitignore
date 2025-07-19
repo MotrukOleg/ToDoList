@@ -1,4 +1,6 @@
 .idea/
-WebApplication1/bin/
-WebApplication1/obj/
+backend/bin/
+backend/obj/
+backend/logs/
+
 

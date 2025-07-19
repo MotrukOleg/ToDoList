@@ -14,10 +14,12 @@ namespace WebApplication1.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<UserController> _logger;
 
-    public UserController(IMediator mediator)
+    public UserController(IMediator mediator , ILogger<UserController> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -41,6 +43,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<User>> Login([FromBody] LoginCommand? input)
     {
+        _logger.LogInformation("Login");
         return Ok(await _mediator.Send(input));
     }
 }

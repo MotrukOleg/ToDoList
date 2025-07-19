@@ -11,8 +11,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250717165945_Change FistName on FirstName")]
-    partial class ChangeFistNameonFirstName
+    [Migration("20250716161912_updRecord")]
+    partial class updRecord
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace WebApplication1.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("WebApplication1.Models.Record", b =>
+            modelBuilder.Entity("Backend.Models.Record", b =>
                 {
                     b.Property<int>("RecordId")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("Record");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.User", b =>
+            modelBuilder.Entity("Backend.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace WebApplication1.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FistName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -81,9 +81,9 @@ namespace WebApplication1.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Record", b =>
+            modelBuilder.Entity("Backend.Models.Record", b =>
                 {
-                    b.HasOne("WebApplication1.Models.User", "User")
+                    b.HasOne("Backend.Models.User", "User")
                         .WithMany("Records")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -92,7 +92,7 @@ namespace WebApplication1.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.User", b =>
+            modelBuilder.Entity("Backend.Models.User", b =>
                 {
                     b.Navigation("Records");
                 });

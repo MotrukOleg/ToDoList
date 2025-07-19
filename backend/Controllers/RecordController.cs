@@ -31,11 +31,11 @@ public class RecordController : ControllerBase
         return Ok(await _mediator.Send(new GetRecordListQuery()));
     }
 
-    [HttpGet("{id}") , Authorize]
+    [HttpGet("/AllForUser"), Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById()
     {
-        return Ok(await _mediator.Send(new GetRecordListById(id)));
+        return Ok(await _mediator.Send(new GetRecordListById()));
     }
     
 
@@ -50,9 +50,9 @@ public class RecordController : ControllerBase
     [HttpPut("{id}") , Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Put(int id, [FromBody] InputRecordDto? record)
+    public async Task<IActionResult> Put(int id, [FromBody] PutRecordCommand? record)
     {
-        return Ok(await _mediator.Send(new PutRecordCommand(id , record.RecordText)));
+        return Ok(await _mediator.Send(record));
     }
 
     [HttpDelete("{id}") , Authorize]

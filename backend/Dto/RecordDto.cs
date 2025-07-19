@@ -18,16 +18,4 @@ public class OutputRecordDto
     public bool Completed { get; set; }
     public int UserId { get; set; }
     public string UserName { get; set; } = null!;
-
-    public static explicit operator OutputRecordDto(Record record)
-    {
-        return new OutputRecordDto
-        {
-            RecordId = record.RecordId,
-            RecordText = record.RecordText,
-            Completed = record.Completed,
-            UserId = record.User.UserId,
-            UserName = record.User.FirstName + " " + record.User.LastName
-        };
-    }
 }

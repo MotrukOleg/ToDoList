@@ -10,10 +10,12 @@ namespace WebApplication1.Common.Services;
 public class TokenService : ITokenService
 {
     private readonly IConfiguration _configuration;
+    private readonly IHttpContextAccessor _httpContext;
 
-    public TokenService(IConfiguration configuration)
+    public TokenService(IConfiguration configuration , IHttpContextAccessor httpContextAccessor)
     {
         _configuration = configuration;
+        _httpContext = httpContextAccessor;
     }
 
     public string GenerateToken(User user)
@@ -36,5 +38,10 @@ public class TokenService : ITokenService
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    
+    public int GetCurrentUserId()
+    {
+        return int.Parse(_httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty);
     }
 }
