@@ -1,0 +1,12 @@
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\bin\Debug\net9.0\ToDoList.DAL.deps.json
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\bin\Debug\net9.0\ToDoList.DAL.dll
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\bin\Debug\net9.0\ToDoList.DAL.pdb
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.csproj.AssemblyReference.cache
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.AssemblyInfoInputs.cache
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.AssemblyInfo.cs
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.csproj.CoreCompileInputs.cache
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.dll
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\refint\ToDoList.DAL.dll
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ToDoList.DAL.pdb
+E:\OLeg\ToDO\ToDoList.WebApi\ToDoList.DAL\obj\Debug\net9.0\ref\ToDoList.DAL.dll

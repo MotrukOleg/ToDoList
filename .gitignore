@@ -1,0 +1,8 @@
+.idea/
+backend/bin/
+backend/obj/
+backend/logs/
+TodoTest/bin/
+TodoTest/obj/
+.vs/
+
