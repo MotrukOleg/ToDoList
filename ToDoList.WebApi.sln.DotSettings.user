@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2b9d5ee3_002D3fce_002D4a8b_002Daeaf_002D13ac203472c6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="RequestValidData_ShouldReturnOutputRecordDto" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D271A14-4584-4811-8D81-383B7D916CA9::net9.0::ToDoList.UnitTests.RecordTest.DeleteRecordCommandHandlerTest.DeleteRecordHandlerTests.RequestValidData_ShouldReturnOutputRecordDto&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D271A14-4584-4811-8D81-383B7D916CA9::net9.0::ToDoList.UnitTests.RecordTest.DeleteRecordCommandHandlerTest.DeleteRecordHandlerTests.RequestInvalidData_ShouldReturnNull&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using ToDoList.BLL.Dto;
 using ToDoList.DAL.repositories.Interfaces;
 
@@ -19,7 +20,8 @@ public class DeleteRecordCommandHandler : IRequestHandler<DeleteRecordCommand, O
     public async Task<OutputRecordDto?> Handle(DeleteRecordCommand request, CancellationToken cancellationToken)
     {
         var record = await _recordRepository.GetByIdAsync(request.Id , cancellationToken);
-        
+        if (record is null) throw new InvalidDataException("There is no such record");
+
         _recordRepository.Delete(record);
         await _recordRepository.SaveChangesAsync(cancellationToken);
         

@@ -1,8 +1,12 @@
 .idea/
-backend/bin/
-backend/obj/
-backend/logs/
-TodoTest/bin/
-TodoTest/obj/
+ToDoList.WebApi/bin/
+ToDoList.WebApi/obj/
+ToDoList.BLL/obj/
+ToDoList.BLL/bin/
+ToDoList.DAL/obj/
+ToDoList.DAL/bin/
+ToDoList.WebApi/Logs/
+ToDoList.UnitTests/bin/
+ToDoList.UnitTests/obj/
 .vs/
 
